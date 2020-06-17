@@ -2,7 +2,6 @@ package lib
 
 import (
 	"errors"
-	"fmt"
 	"github.com/gomodule/redigo/redis"
 	"math/rand"
 	"time"
@@ -23,11 +22,11 @@ var ConfRedis *RedisConf
 var ConfRedisMap *RedisMapConf
 
 
-func InitRedisPool(){
-	if err := InitRedisConf(GetConfPath("redis_map")); err != nil {
-		fmt.Printf("[ERROR] %s%s\n", time.Now().Format(TimeFormat), " InitRedisConf:"+err.Error())
-	}
-}
+//func InitRedisPool(){
+//	if err := InitRedisConf(GetConfPath(configPath,"redis_map")); err != nil {
+//		fmt.Printf("[ERROR] %s%s\n", time.Now().Format(TimeFormat), " InitRedisConf:"+err.Error())
+//	}
+//}
 
 func InitRedisConf(path string) error {
 	ConfRedis := &RedisMapConf{}

@@ -32,8 +32,8 @@ func ParseConfig(path string, conf interface{}) error {
 	return nil
 }
 
-func GetConfPath(fileName string) string {
-	return  "./" + fileName + ".toml"
+func GetConfPath(configPath ,fileName string) string {
+	return  configPath + fileName + ".toml"
 }
 
 func GetConfEnv() string{

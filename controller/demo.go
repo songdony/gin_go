@@ -21,7 +21,7 @@ func DemoRegister(router *gin.RouterGroup) {
 }
 
 func (demo *DemoController) Index(c *gin.Context) {
-	middleware.ResponseSuccess(c, "alibaba")
+	middleware.ResponseSuccess(c, "hello")
 	return
 }
 
@@ -36,10 +36,6 @@ func (demo *DemoController) Detail(c *gin.Context) {
 		return
 	}
 
-	//if params.BookId == 0 {
-	//	middleware.ResponseError(c, 2001, errors.New("没有传入书的id"))
-	//	return
-	//}
 	tx, err := lib.GetGormPool("default")
 	if err != nil {
 		middleware.ResponseError(c, 2002, err)

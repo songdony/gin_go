@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"os"
 	"strings"
+	"time"
 )
 
 type BaseConf struct {
@@ -20,6 +21,55 @@ type BaseConf struct {
 
 var ConfBase *BaseConf
 var ViperConfMap map[string]*viper.Viper
+
+func InStringArray(s string,arr []string) bool{
+	for _,v := range arr{
+		if s==v{
+			return true
+		}
+	}
+	return false
+}
+
+func InitModule(configPath string,modules []string) error {
+	var conf *string
+	if len(configPath) > 0 {
+		conf = &configPath
+	} else {
+		fmt.Printf("[ERROR] %s%s\n", time.Now().Format(TimeFormat), " Can't not find init config:初始化配置为空")
+		os.Exit(1)
+	}
+
+	// 解析配置文件目录
+	if err := ParseConfPath(*conf); err != nil {
+		fmt.Printf("[ERROR] %s%s\n", time.Now().Format(TimeFormat), " ParseConfPath:"+err.Error())
+	}
+
+	//初始化配置文件
+	if err := InitViperConf(); err != nil {
+		fmt.Printf("[ERROR] %s%s\n", time.Now().Format(TimeFormat), " InitViperConf:"+err.Error())
+	}
+
+	if InStringArray("base",modules){
+		if err := InitBaseConf(GetConfPath(configPath,"base")); err != nil {
+			fmt.Printf("[ERROR] %s%s\n", time.Now().Format(TimeFormat), " InitBaseConf:"+err.Error())
+		}
+	}
+
+	if InStringArray("mysql",modules){
+		if err := InitDBPool(GetConfPath(configPath,"mysql")); err != nil {
+			fmt.Printf("[ERROR] %s%s\n", time.Now().Format(TimeFormat), " InitDBPool:"+err.Error())
+		}
+	}
+
+	if InStringArray("redis",modules){
+		if err := InitRedisConf(GetConfPath(configPath,"redis")); err != nil {
+			fmt.Printf("[ERROR] %s%s\n", time.Now().Format(TimeFormat), " InitRedis:"+err.Error())
+		}
+	}
+
+	return nil
+}
 
 func GetBaseConf() *BaseConf {
 	return ConfBase
@@ -51,9 +101,6 @@ func InitBaseConf(path string) error {
 	return nil
 }
 
-// 配置文件必须放到一个文件夹中
-// 如：config=conf/dev/base.json 	ConfEnvPath=conf/dev	ConfEnv=dev
-// 如：config=conf/base.json		ConfEnvPath=conf		ConfEnv=conf
 func ParseConfPath(config string) error {
 	path := strings.Split(config, "/")
 	prefix := strings.Join(path[:len(path)-1], "/")
@@ -105,8 +152,6 @@ func GetIntConf(key string) int {
 }
 
 func GetStringConf(key string) string {
-	fmt.Println("key=",key)
-	fmt.Println("ViperConfMap=",ViperConfMap)
 	keys := strings.Split(key, ".")
 	if len(keys) < 2 {
 		return ""
