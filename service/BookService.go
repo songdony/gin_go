@@ -1,8 +1,8 @@
 package service
 
 import (
-	"gin_scaffold/entity"
-	"gin_scaffold/common"
+	"gin_go/entity"
+	"gin_go/common"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 )

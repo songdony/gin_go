@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"gin_scaffold/common"
+	"gin_go/common"
 	"github.com/gin-gonic/gin"
 	"gopkg.in/go-playground/validator.v9"
 	"reflect"

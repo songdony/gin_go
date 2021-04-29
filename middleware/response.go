@@ -3,7 +3,7 @@ package middleware
 import (
 	"encoding/json"
 	"fmt"
-	"gin_scaffold/lib"
+	"gin_go/lib"
 	"github.com/gin-gonic/gin"
 	"strings"
 )

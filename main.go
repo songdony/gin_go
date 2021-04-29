@@ -1,11 +1,12 @@
 package main
 
 import (
-	"gin_scaffold/lib"
-	"gin_scaffold/router"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"gin_go/lib"
+	"gin_go/router"
 )
 
 var TimeFormat = "2006-01-02 15:04:05"

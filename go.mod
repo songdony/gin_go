@@ -1,4 +1,4 @@
-module gin_scaffold
+module gin_go
 
 go 1.13
 

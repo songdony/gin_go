@@ -3,7 +3,7 @@ package middleware
 import (
 	"errors"
 	"fmt"
-	"gin_scaffold/lib"
+	"gin_go/lib"
 	"github.com/gin-gonic/gin"
 	"runtime/debug"
 )

@@ -2,10 +2,10 @@ package controller
 
 import (
 	"fmt"
-	"gin_scaffold/entity"
-	"gin_scaffold/lib"
-	"gin_scaffold/middleware"
-	"gin_scaffold/service"
+	"gin_go/entity"
+	"gin_go/lib"
+	"gin_go/middleware"
+	"gin_go/service"
 	"github.com/gin-gonic/gin"
 )
 

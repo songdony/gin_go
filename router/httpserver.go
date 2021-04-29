@@ -2,7 +2,7 @@ package router
 
 import (
 	"context"
-	"gin_scaffold/lib"
+	"gin_go/lib"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
